@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Helper</title>
+    <style>
+        .item_1 { grid-area: header_part; }
+        .item_2 { grid-area : nav_part; }
+        .item_3 { grid-area : main_part; }
+        .item_4 { grid-area : footer_part; }
+
+        .grid_container {
+            display: grid;
+            grid-template-areas: 
+                'header_part'
+                'nav_part'
+                'main_part'
+                'footer_part'
+            ;
+            gap: 10px;
+            justify-items: center;
+        }
+
+        table {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid_container">
+        <div class="item_1">
+            <h1> Deck </h1>
+        </div>
+        <div class="item_2">
+            <a href="http://127.0.0.1:8080/index">Home</a>
+            <a href="http://127.0.0.1:8080/deck">Deck</a>
+        </div>
+        <div class="item_3">
+            <table>
+                <thead>
+                    <tr>
+                        <th>이름</th>
+                        <th>열기</th>
+                        <th>삭제</th>
+                    </tr>
+                </thead>
+                <tbody class="t_body">
+                    <tr class="clone">
+                        <td>영어</td>
+                        <td>O</td>
+                        <td>X</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="check_info">check info</button>
+        </div>
+        <div class="item_4">
+            <p>footer</p>
+        </div>
+    </div>
+
+    <script>
+        let t_body = document.getElementsByClassName("t_body");
+        let clone = document.getElementsByClassName("clone");
+        let check_info = document.getElementById("check_info");
+
+        check_info.addEventListener("click", function(e){
+            e.preventDefault();
+            DeckList();
+
+        })
+
+
+        function DeckList () {
+            fetch("/deck/list")
+            .then((res)=>{return res.json()})
+            .then((result)=>{
+                let deck_name = result;
+                
+                for(let i = 0; i < deck_name.length; i++){
+                    let new_node = clone[0].cloneNode(true);
+                    if(i == 0){
+                        t_body[0].innerHTML = "";
+                    }
+                    new_node.childNodes[1].textContent = deck_name[i];
+                    t_body[0].append(new_node);
+                }
+            })
+        }
+
+        function DeckCreate () {
+            let data = "";
+            fetch("/deck/create")
+            .then()
+        }
+
+
+
+    </script>
+    
+</body>
+</html>

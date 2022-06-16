@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Helper</title>
+    <style>
+        .item_1 { grid-area: header; }
+        .item_2 { grid-area : nav }
+        .item_3 { grid-area : main }
+        .item_4 { grid-area : footer }
+
+        .grid_container {
+            display: grid;
+            grid-template-areas: 
+                'header'
+                'nav'
+                'main'
+                'footer'
+            ;
+            gap: 10px;
+            justify-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="grid_container">
+        <div class="item_1">
+            <h1> Study Helper Index </h1>
+        </div>
+        <div class="item_2">
+            <a href="http://127.0.0.1:8080/index">Home</a>
+            <a href="http://127.0.0.1:8080/deck">Deck</a>
+        </div>
+        <div class="item_3">
+            <p>
+                main
+            </p>
+        </div>
+        <div class="item_4">
+            footer
+        </div>
+    </div>
+    
+</body>
+</html>
